@@ -1,0 +1,14 @@
+.DS_Store
+.vs/
+Binaries/
+Build/
+Intermediate/
+Saved/
+__MACOSX/
+backup.sh
+MCGameplayAbilities.sdf
+MCGameplayAbilities.sln
+MCGameplayAbilities.xcworkspace
+MCGameplayAbilities.VC.db
+MCGameplayAbilities.VC.VC.opendb
+enc_temp_folder/
