@@ -45,9 +45,6 @@ AMCGameplayAbilitiesCharacter::AMCGameplayAbilitiesCharacter()
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
-
-	AbilitySystem = CreateDefaultSubobject<UMCAbilitySystemComponent>(TEXT("AbilitySystem"));
-	AttributeSet = CreateDefaultSubobject<UMCCharacterAttributeSet>(TEXT("AttributeSet"));
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -91,6 +88,11 @@ void AMCGameplayAbilitiesCharacter::SetupPlayerInputComponent(class UInputCompon
 UAbilitySystemComponent* AMCGameplayAbilitiesCharacter::GetAbilitySystemComponent() const
 {
 	return Cast<UAbilitySystemComponent>(AbilitySystem);
+}
+
+void AMCGameplayAbilitiesCharacter::SetAbilitySystem(UMCAbilitySystemComponent* NewASC)
+{
+	AbilitySystem = NewASC;
 }
 
 void AMCGameplayAbilitiesCharacter::OnResetVR()
@@ -191,3 +193,4 @@ void AMCGameplayAbilitiesCharacter::AbilitySlot5()
 {
 	ActivateAbilityInSlot(5);
 }
+

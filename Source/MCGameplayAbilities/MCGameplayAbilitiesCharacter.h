@@ -33,11 +33,10 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = AbilitySystem, meta = (AllowPrivateAccess = "true"))
 	class UMCAbilitySystemComponent* AbilitySystem;
 
-	UPROPERTY()
-	class UMCCharacterAttributeSet* AttributeSet;
-
 	// IAbilitySystemInterface
 	class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+	void SetAbilitySystem(UMCAbilitySystemComponent* NewASC);
 
 protected:
 	UFUNCTION()

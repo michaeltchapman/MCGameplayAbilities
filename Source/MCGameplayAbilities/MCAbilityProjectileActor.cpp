@@ -13,11 +13,20 @@ AMCAbilityProjectileActor::AMCAbilityProjectileActor(const FObjectInitializer& I
 	CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("Collision"));
 	SetRootComponent(CollisionComponent);
 	MovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("MovementComponent"));
+	MovementComponent->bAutoActivate = false;
 }
 
 void AMCAbilityProjectileActor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (Instigator)
+	{
+		SetActorRotation(Instigator->GetActorRotation());
+	}
+	MovementComponent->UpdateComponentToWorld();
+	MovementComponent->SetVelocityInLocalSpace(FVector(1000.f, 0.f, 0.f));
+	MovementComponent->Activate();
 
 	if (bSendOverlapEvents)
 	{

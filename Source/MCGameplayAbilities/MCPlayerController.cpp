@@ -24,25 +24,14 @@ void AMCPlayerController::Possess(APawn* P)
 {
 	Super::Possess(P);
 
-	UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(P);
-	if (ASC)
-	{
-		ASC->InitAbilityActorInfo(P, P);
-		UpdateCharacter();
-	}
+	UpdateCharacter();
 }
 
 void AMCPlayerController::AcknowledgePossession(APawn* P)
 {
 	Super::AcknowledgePossession(P);
 
-	UAbilitySystemComponent* ASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(P);
-	if (ASC)
-	{
-		ASC->InitAbilityActorInfo(P, P);
-		UpdateCharacter();
-	}
-
+	UpdateCharacter();
 }
 
 void AMCPlayerController::UpdateCharacter()

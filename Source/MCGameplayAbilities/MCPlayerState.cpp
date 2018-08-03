@@ -3,6 +3,7 @@
 #include "MCPlayerState.h"
 #include "UnrealNetwork.h"
 #include "MCAbilitySystemComponent.h"
+#include "MCCharacterAttributeSet.h"
 #include "MCGameplayAbilitiesCharacter.h"
 
 
@@ -12,6 +13,10 @@ AMCPlayerState::AMCPlayerState()
 {
 	CurrentCharacter = -1;
 	bInitialized;
+
+	AbilitySystem = CreateDefaultSubobject<UMCAbilitySystemComponent>(TEXT("AbilitySystem"));
+	AttributeSet = CreateDefaultSubobject<UMCCharacterAttributeSet>(TEXT("AttributeSet"));
+
 }
 
 void AMCPlayerState::PopulateCharacterInfo()
@@ -85,14 +90,17 @@ bool AMCPlayerState::ApplyCurrentCharacterInfo(AMCGameplayAbilitiesCharacter* Ch
 		return false;
 	}
 
-	UMCAbilitySystemComponent* ASC = Character->AbilitySystem;
+	Character->SetAbilitySystem(AbilitySystem);
+	AbilitySystem->InitAbilityActorInfo(this, Character);
+	
 	// Set things on the character's ASC
-	if (ASC)
+	if (HasAuthority())
 	{
-		for (int32 i = 0; i < Current->EquippedAbilities.Num(); i++)
-		{
-			ASC->AddAbilityToSlot(i, Current->EquippedAbilities[i]);
-		}
+		AbilitySystem->ClearAllAbilities();
+	}
+	for (int32 i = 0; i < Current->EquippedAbilities.Num(); i++)
+	{
+		AbilitySystem->AddAbilityToSlot(i, Current->EquippedAbilities[i]);
 	}
 
 	return true;

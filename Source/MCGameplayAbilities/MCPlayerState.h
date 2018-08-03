@@ -64,6 +64,12 @@ public:
 
 	bool bInitialized;
 protected:
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = AbilitySystem, meta = (AllowPrivateAccess = "true"))
+	class UMCAbilitySystemComponent* AbilitySystem;
+	UPROPERTY()
+	class UMCCharacterAttributeSet* AttributeSet;
+
 	UPROPERTY(ReplicatedUsing = OnRep_CurrentCharacter)
 	int32 CurrentCharacter;
 
