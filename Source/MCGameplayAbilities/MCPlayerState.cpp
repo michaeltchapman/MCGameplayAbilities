@@ -111,6 +111,11 @@ void AMCPlayerState::OnRep_CurrentCharacter()
 	OnCharacterInfoChange.Broadcast();
 }
 
+UAbilitySystemComponent* AMCPlayerState::GetAbilitySystemComponent() const
+{
+	return Cast<UAbilitySystemComponent>(AbilitySystem);
+}
+
 void AMCPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);

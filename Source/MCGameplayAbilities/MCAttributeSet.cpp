@@ -17,6 +17,8 @@ bool UMCAttributeSet::PreGameplayEffectExecute(FGameplayEffectModCallbackData &D
 
 void UMCAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData &Data)
 {
+	Super::PostGameplayEffectExecute(Data);
+
 	if (AttributeHealth() == Data.EvaluatedData.Attribute)
 	{
 		if (Health.GetCurrentValue() < 0.f)

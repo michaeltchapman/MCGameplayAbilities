@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerState.h"
+#include "AbilitySystemInterface.h"
 #include "MCPlayerState.generated.h"
 
 // The controller can use this to know when the current character is changed,
@@ -34,7 +35,7 @@ struct FCharacterInfo
  * Stores the available characters and the current character for the player
  */
 UCLASS()
-class MCGAMEPLAYABILITIES_API AMCPlayerState : public APlayerState
+class MCGAMEPLAYABILITIES_API AMCPlayerState : public APlayerState, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 public:
@@ -58,6 +59,8 @@ public:
 	// and server, and should be idempotent. Will also be called when the current character info is
 	// changed
 	bool ApplyCurrentCharacterInfo(class AMCGameplayAbilitiesCharacter* Character);
+
+	class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 	UPROPERTY()
 	FCharacterInfoChange OnCharacterInfoChange;
